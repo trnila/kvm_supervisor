@@ -1,5 +1,6 @@
 // top of the stack
 extern void _estack(void);
+
 void main();
 
 void Reset_Handler() {
@@ -61,7 +62,6 @@ __attribute__((weak, alias("default_irq_handler"))) void USART2_IRQHandler();
 __attribute__((weak, alias("default_irq_handler"))) void EXTI15_10_IRQHandler();
 __attribute__((weak, alias("default_irq_handler"))) void RTC_Alarm_IRQHandler();
 __attribute__((weak, alias("default_irq_handler"))) void USBWakeUp_IRQHandler();
-__attribute__((weak, alias("default_irq_handler"))) void BootRAM();
 
 __attribute__ ((used, section(".isr_vector"))) void (*vectors[])(void) = {
   &_estack,
@@ -130,5 +130,5 @@ __attribute__ ((used, section(".isr_vector"))) void (*vectors[])(void) = {
   0,
   0,
   0,
-  BootRAM,
+  (void(*)(void)) 0xF108F85F // BootRAM
 };
