@@ -9,7 +9,7 @@ LDFLAGS = -specs=nano.specs -TSTM32F103C6Tx_FLASH.ld -lc -lnosys
 
 all: $(TARGET)
 
-$(TARGET): main.o startup_stm32f103x6.o
+$(TARGET): main.o startup.o
 	$(CC) $^ $(LDFLAGS) -o $@
 	$(SZ) $@
 
