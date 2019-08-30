@@ -1,9 +1,27 @@
 // top of the stack
 extern void _estack(void);
+extern unsigned int _sidata; // .data in flash
+extern unsigned int _sdata; // start of .data in SRAM
+extern unsigned int _edata; // end of .data in SRAM
+extern unsigned int _sbss; // start of .bss in SRAM
+extern unsigned int _ebss; // end of .bss in SRAM
 
 void main();
 
 void Reset_Handler() {
+  // copy .data section from flash to sram
+  unsigned int *src = &_sidata;
+  unsigned int *dst = &_sdata;
+  while(dst < &_edata) {
+    *dst++ = *src++;
+  }
+
+  // zero the .bss section
+  dst = &_sbss;
+  while(dst < &_ebss) {
+    *dst++ = 0;
+  }
+
   main();
   asm("bkpt #1");
   for(;;);
