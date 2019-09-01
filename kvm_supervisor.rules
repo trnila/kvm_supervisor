@@ -1,0 +1,2 @@
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="1a40", ATTR{idProduct}=="0101", RUN+="/bin/sh -x -c 'export PATH=/usr/bin; cd /etc/dock/dock/; for i in *; do [ -x $i ] && ./$i; done'"
+ACTION=="remove", SUBSYSTEM=="usb", ENV{PRODUCT}=="1a40/101*", ENV{DEVNAME}=="/dev/*", RUN+="/bin/sh -x -c 'export PATH=/usr/bin; cd /etc/dock/undock/; for i in *; do [ -x $i ] && ./$i; done'"
