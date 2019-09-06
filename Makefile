@@ -5,4 +5,4 @@ install_udev_rule: kvm_supervisor.rules
 	udevadm control --reload-rules
 
 install_%: % install_udev_rule
-	cp -rv $< /etc/dock/
+	cp -rv $</* /etc/dock/
