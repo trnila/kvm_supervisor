@@ -1,3 +1,3 @@
 #!/bin/sh
-DISPLAY=:0 /usr/bin/xrandr --output VGA1 --off --output LVDS1 --auto
-
+export SWAYSOCK=$(ls /run/user/1000/sway-ipc.1000.*.sock)
+swaymsg output LVDS-1 enable
